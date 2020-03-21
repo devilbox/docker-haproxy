@@ -1,7 +1,7 @@
 # vim: set ft=dockerfile:
 FROM haproxy:1
 
-ARG CERTGEN=0.3
+ARG CERTGEN=0.7
 ARG WATCHERD=master
 
 RUN set -x \
