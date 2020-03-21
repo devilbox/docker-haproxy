@@ -1,9 +1,37 @@
+ifneq (,)
+.error This Makefile requires GNU Make.
+endif
+
+
+# -------------------------------------------------------------------------------------------------
+# Docker configuration
+# -------------------------------------------------------------------------------------------------
+
 DIR = .
 FILE = Dockerfile
 IMAGE = devilbox/haproxy
 TAG = latest
 
-.PHONY: build rebuild test tag pull login push enter
+.PHONY: help build rebuild test tag pull login push enter
+
+
+# -------------------------------------------------------------------------------------------------
+#  DEFAULT TARGET
+# -------------------------------------------------------------------------------------------------
+
+help:
+	@echo "build               Build Docker image"
+	@echo "rebuild             Rebuild Docker image without cache"
+	@echo "tag [TAG=]          Tag Docker image"
+	@echo "pull                Pull latest base image"
+	@echo "login USER= PASS=   Login to Dockerhub"
+	@echo "push [TAG=]         Push Docker image (and retag)"
+	@echo "enter               Spawn bash and enter Docker image"
+
+
+# -------------------------------------------------------------------------------------------------
+#  GENERATE TARGETS
+# -------------------------------------------------------------------------------------------------
 
 build:
 	docker build -t $(IMAGE) -f $(DIR)/$(FILE) $(DIR)
